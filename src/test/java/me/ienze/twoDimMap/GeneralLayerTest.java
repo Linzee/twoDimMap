@@ -7,55 +7,55 @@ import org.junit.Test;
 /**
  * @author Ienze
  */
-public class BooleanLayerTest {
+public class GeneralLayerTest {
 
     @Test
     public void testEmptyLayer()
     {
-        MapLayer layer = new BooleanMapLayer(9,11);
+        MapLayer layer = new GeneralMapLayer(9,11);
 
         Assert.assertEquals(9, layer.getWidth());
         Assert.assertEquals(11, layer.getHeight());
         Assert.assertEquals(new Vec(9,11), layer.getSize());
 
-        Assert.assertEquals(false, layer.get(0, 0));
+        Assert.assertEquals(0.0f, layer.get(0, 0));
     }
 
     @Test
     public void testLayerSetAndGet()
     {
-        MapLayer layer = new BooleanMapLayer(10, 10);
+        MapLayer layer = new GeneralMapLayer(10, 10);
 
-        Assert.assertEquals(false, layer.get(0,0));
+        Assert.assertEquals(0.0f, layer.get(0,0));
 
-        layer.set(0, 0, true);
+        layer.set(0, 0, 1.0f);
 
-        Assert.assertEquals(true, layer.get(0,0));
+        Assert.assertEquals(1.0f, layer.get(0,0));
 
-        layer.set(0, 0, false);
+        layer.set(0, 0, 0.0f);
 
-        Assert.assertEquals(false, layer.get(0,0));
+        Assert.assertEquals(0.0f, layer.get(0,0));
     }
 
 
     @Test
     public void testLayerSetMany()
     {
-        MapLayer layer = new BooleanMapLayer(10, 10);
+        MapLayer layer = new GeneralMapLayer(10, 10);
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(false, layer.get(i,i));
+            Assert.assertEquals(0.0f, layer.get(i,i));
         }
 
         for (int i = 0; i < 10; i++) {
-            layer.set(i, i, true);
+            layer.set(i, i, i * 0.1f);
         }
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(true, layer.get(i,i));
+            Assert.assertEquals(i * 0.1f, layer.get(i,i));
         }
         for (int i = 0; i < 8; i++) {
-            Assert.assertEquals(false, layer.get(1,0));
+            Assert.assertEquals(0.0f, layer.get(1,0));
         }
     }
 

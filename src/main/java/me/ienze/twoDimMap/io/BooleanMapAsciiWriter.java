@@ -2,12 +2,15 @@ package me.ienze.twoDimMap.io;
 
 import me.ienze.twoDimMap.MapLayer;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 
 public class BooleanMapAsciiWriter {
+
+	public void write(MapLayer<Boolean> layer, File file) throws IOException {
+		try(OutputStream out = new FileOutputStream(file)) {
+			write(layer, out);
+		}
+	}
 
 	public void write(MapLayer<Boolean> layer, OutputStream out) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));

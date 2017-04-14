@@ -3,15 +3,18 @@ package me.ienze.twoDimMap.io;
 import me.ienze.twoDimMap.BooleanMapLayer;
 import me.ienze.twoDimMap.MapLayer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.regex.Pattern;
 
 public class BooleanMapAsciiReader {
 
 	private static final Pattern tilePattern = Pattern.compile("(#|.)");
+
+	public MapLayer<Boolean> read(File file) throws IOException {
+		try(InputStream in = new FileInputStream(file)) {
+			return read(in);
+		}
+	}
 
 	public MapLayer<Boolean> read(InputStream in) throws IOException {
 		BufferedReader innerReader = new BufferedReader(new InputStreamReader(in));

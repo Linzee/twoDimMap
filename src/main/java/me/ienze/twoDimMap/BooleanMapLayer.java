@@ -1,11 +1,11 @@
 package me.ienze.twoDimMap;
 
+import java.awt.*;
 import java.util.BitSet;
 
 public class BooleanMapLayer implements MapLayer<Boolean> {
 	
 	private Vec size;
-	private Vec position;
 	private BitSet data;
 	
 	public BooleanMapLayer(int width, int height) {
@@ -13,24 +13,10 @@ public class BooleanMapLayer implements MapLayer<Boolean> {
 	}
 	
 	public BooleanMapLayer(Vec size) {
-		this.position = new Vec(0, 0);
 		this.size = size;
 		this.data = new BitSet(size.x * size.y);
 	}
 
-    public BooleanMapLayer(int width, int height, int x, int y) {
-		this(new Vec(width, height), new Vec(x, y));
-    }
-
-	public BooleanMapLayer(Vec size, Vec position) {
-		this(size);
-		this.position = position;
-	}
-
-	public Vec getPosition() {
-		return position;
-	}
-	
 	public Vec getSize() {
 		return size;
 	}
@@ -59,6 +45,17 @@ public class BooleanMapLayer implements MapLayer<Boolean> {
 		}
 		int index = y * size.x + x;
 		data.set(index, value);
+	}
+
+	@Override
+	public Color getColor(int x, int y) {
+		Boolean value = get(x, y);
+		return value ? Color.WHITE : Color.BLACK;
+	}
+
+	@Override
+	public void setColor(int x, int y, Color color) {
+		set(x, y, color.equals(Color.WHITE));
 	}
 
 	public void setWidth(int width) {

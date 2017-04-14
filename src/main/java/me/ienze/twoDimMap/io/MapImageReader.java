@@ -1,5 +1,6 @@
 package me.ienze.twoDimMap.io;
 
+import me.ienze.twoDimMap.GeneralMapLayer;
 import me.ienze.twoDimMap.MapLayer;
 
 import javax.imageio.ImageIO;
@@ -15,10 +16,6 @@ import java.io.InputStream;
  */
 abstract public class MapImageReader<T> {
 
-    public MapImageReader() {
-
-    }
-
     public MapLayer<T> read(File file) throws IOException {
         try(InputStream in = new FileInputStream(file)) {
             return read(in);
@@ -32,14 +29,12 @@ abstract public class MapImageReader<T> {
 
         for(int x = 0; x<image.getWidth(); x++) {
             for(int y = 0; y<image.getHeight(); y++) {
-                layer.set(x, y, parseColor(new Color(image.getRGB(x, y))));
+                layer.setColor(x, y, new Color(image.getRGB(x, y)));
             }
         }
 
         return layer;
     }
-
-    protected abstract T parseColor(Color color);
 
     protected abstract MapLayer<T> newMapLayer(int width, int height);
 

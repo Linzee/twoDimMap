@@ -11,10 +11,6 @@ public abstract class MapImageWriter<T> {
 
     private String format = "PNG";
 
-	public MapImageWriter() {
-
-	}
-
     public void write(MapLayer<T> layer, File file) throws IOException {
         try(OutputStream out = new FileOutputStream(file)) {
             write(layer, out);
@@ -26,14 +22,12 @@ public abstract class MapImageWriter<T> {
 
 		for(int x = 0; x<image.getWidth(); x++) {
 			for(int y = 0; y<image.getHeight(); y++) {
-				image.setRGB(x, y, encode(layer.get(x, y)).getRGB());
+				image.setRGB(x, y, layer.getColor(x, y).getRGB());
 			}
 		}
 
 		ImageIO.write(image, format, out);
 	}
-
-    protected abstract Color encode(T value);
 
     public String getFormat() {
         return format;
