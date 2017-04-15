@@ -1,10 +1,10 @@
 TwoDimMap is library for representation and storing two dimensional maps of finite size. Map can represent different types of information. For example black&white mask, heightmap, RGB image.
 
 ## Features
-	- Data layers
-	- Storing and loading: images, ascii images
-	- Map transformations
-	- Generic typed classes  allows for different implementations for storing data
+- Data layers
+- Storing and loading: images, ascii images
+- Map transformations
+- Generic typed classes  allows for different implementations for storing data
 
 ## Usage
 ### Working with boolean layer (mask):
@@ -43,7 +43,7 @@ combined.get(0, 0); //returns combined value using chosen mode
 ```
 
 ### CombineMode list
-NORMAL (default) - Uses first non black color occurred
-AVG - Average of layers
-MIN - Darkest color
-MAX - Lightest color
+- NORMAL (default) - Uses first non black color occurred
+- AVG - Average of layers
+- MIN - Darkest color
+- MAX - Lightest color
