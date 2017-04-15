@@ -11,7 +11,15 @@ import java.lang.UnsupportedOperationException;
 public class CombineMapLayer implements MapLayer<Float> {
 
     private List<MapLayer> layers = new ArrayList<MapLayer>();
-    private CombineMethod mode;
+    private CombineMode mode;
+
+    public CombineMapLayer() {
+        this(CombineMode.NORMAL);
+    }
+
+    public CombineMapLayer(CombineMode mode) {
+        this.mode = mode;
+    }
 
     @Override
     public Vec getSize() {
@@ -99,7 +107,15 @@ public class CombineMapLayer implements MapLayer<Float> {
         throw new UnsupportedOperationException("Modification not supported on combined layer");
     }
 
-    public enum CombineMethod {
+    public void addLayer(MapLayer layer) {
+        this.layers.add(layer);
+    }
+
+    public void removeLayer(MapLayer layer) {
+        this.layers.remove(layer);
+    }
+
+    public enum CombineMode {
         NORMAL,
         AVG,
         MIN,
