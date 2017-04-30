@@ -76,6 +76,12 @@ public class CombineMapLayer implements MapLayer<Float> {
                     max = Math.min(max, general(layer.get(x, y)) );
                 }
                 return max;
+            case MULTIPLY:
+                float mul = 1.0f;
+                for(MapLayer layer : layers) {
+                    mul *= general(layer.get(x, y));
+                }
+                return mul;
             default:
                 throw new IllegalArgumentException("Illegal combine mode");
         }
@@ -119,6 +125,7 @@ public class CombineMapLayer implements MapLayer<Float> {
         NORMAL,
         AVG,
         MIN,
-        MAX
+        MAX,
+        MULTIPLY
     }
 }
