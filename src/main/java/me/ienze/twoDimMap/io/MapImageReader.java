@@ -14,18 +14,18 @@ import java.io.InputStream;
 /**
  * @author Ienze
  */
-abstract public class MapImageReader<T> {
+abstract public class MapImageReader<T extends MapLayer> {
 
-    public MapLayer<T> read(File file) throws IOException {
+    public T read(File file) throws IOException {
         try(InputStream in = new FileInputStream(file)) {
             return read(in);
         }
     }
 
-    public MapLayer<T> read(InputStream in) throws IOException {
+    public T read(InputStream in) throws IOException {
         BufferedImage image = ImageIO.read(in);
 
-        MapLayer<T> layer = newMapLayer(image.getWidth(), image.getHeight());
+        T layer = newMapLayer(image);
 
         for(int x = 0; x<image.getWidth(); x++) {
             for(int y = 0; y<image.getHeight(); y++) {
@@ -36,6 +36,6 @@ abstract public class MapImageReader<T> {
         return layer;
     }
 
-    protected abstract MapLayer<T> newMapLayer(int width, int height);
+    protected abstract T newMapLayer(BufferedImage image);
 
 }

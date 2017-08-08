@@ -1,10 +1,10 @@
 package me.ienze.twoDimMap.io;
 
-import java.awt.*;
+import me.ienze.twoDimMap.GeneralMapLayer;
 
 /**
  * @author Ienze
  */
-public class GeneralMapImageWriter extends MapImageWriter<Float> {
+public class GeneralMapImageWriter extends MapImageWriter<GeneralMapLayer> {
 
 }

@@ -4,12 +4,13 @@ import me.ienze.twoDimMap.GeneralMapLayer;
 import me.ienze.twoDimMap.MapLayer;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
-public class GeneralMapImageReader extends MapImageReader<Float> {
+public class GeneralMapImageReader extends MapImageReader<GeneralMapLayer> {
 
 	@Override
-	protected MapLayer<Float> newMapLayer(int width, int height) {
-		return new GeneralMapLayer(width, height);
+	protected GeneralMapLayer newMapLayer(BufferedImage image) {
+		return new GeneralMapLayer(image.getWidth(), image.getHeight());
 	}
 }
