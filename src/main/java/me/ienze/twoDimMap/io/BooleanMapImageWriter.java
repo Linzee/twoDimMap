@@ -2,8 +2,6 @@ package me.ienze.twoDimMap.io;
 
 import me.ienze.twoDimMap.BooleanMapLayer;
 
-import java.awt.*;
-
 /**
  * @author Ienze
  */

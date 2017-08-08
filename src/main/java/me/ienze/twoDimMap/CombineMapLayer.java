@@ -3,7 +3,6 @@ package me.ienze.twoDimMap;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.UnsupportedOperationException;
 
 /**
  * Created by Ienze
@@ -25,7 +24,7 @@ public class CombineMapLayer implements MapLayer<Float> {
     public Vec getSize() {
         int width = 0;
         int height = 0;
-        for(MapLayer l : layers) {
+        for (MapLayer l : layers) {
             width = Math.max(width, l.getWidth());
             height = Math.max(height, l.getHeight());
         }
@@ -45,13 +44,13 @@ public class CombineMapLayer implements MapLayer<Float> {
     @Override
     public Float get(int x, int y) {
 
-        if(layers.size() == 0) {
+        if (layers.size() == 0) {
             throw new IllegalArgumentException("Combined layer requires at least one added layer");
         }
 
         switch (mode) {
             case NORMAL:
-                for(MapLayer layer : layers) {
+                for (MapLayer layer : layers) {
                     float value = general(layer.get(x, y));
                     if (value > 0) {
                         return value;
@@ -60,25 +59,25 @@ public class CombineMapLayer implements MapLayer<Float> {
                 return 0.0f;
             case AVG:
                 float avg = 0.0f;
-                for(MapLayer layer : layers) {
+                for (MapLayer layer : layers) {
                     avg += general(layer.get(x, y));
                 }
                 return avg / layers.size();
             case MIN:
                 float min = -Float.MAX_VALUE;
-                for(MapLayer layer : layers) {
-                    min = Math.min(min, general(layer.get(x, y)) );
+                for (MapLayer layer : layers) {
+                    min = Math.min(min, general(layer.get(x, y)));
                 }
                 return min;
             case MAX:
                 float max = Float.MAX_VALUE;
-                for(MapLayer layer : layers) {
-                    max = Math.min(max, general(layer.get(x, y)) );
+                for (MapLayer layer : layers) {
+                    max = Math.min(max, general(layer.get(x, y)));
                 }
                 return max;
             case MULTIPLY:
                 float mul = 1.0f;
-                for(MapLayer layer : layers) {
+                for (MapLayer layer : layers) {
                     mul *= general(layer.get(x, y));
                 }
                 return mul;
@@ -88,10 +87,10 @@ public class CombineMapLayer implements MapLayer<Float> {
     }
 
     private float general(Object o) {
-        if(o instanceof Float) {
+        if (o instanceof Float) {
             return (Float) o;
         }
-        if(o instanceof Boolean) {
+        if (o instanceof Boolean) {
             return ((Boolean) o) ? 1.0f : 0.0f;
         }
         throw new UnsupportedOperationException("Unsupported layer type");
